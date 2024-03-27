@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles/styles.css">
+  <title>ESP32</title>  
+</head>
+<body>
+  <button class="logout" id="log-out">Log out</button>
+  <div class="container">
+    <h1>ESP32</h1>
+    <div class="sub-container">
+      <h4>Light</h4>
+      <label class="switch">
+        <input type="checkbox" id="first-relay">
+        <span class="slider round"></span>
+      </label>
+    </div>
+    <div class="sub-container">
+      <h4>Computer</h4>
+      <label class="switch">
+        <input type="checkbox" id="second-relay">
+        <span class="slider round"></span>
+      </label>
+    </div>
+    <div class="sub-container">
+      <h4>Fan</h4>
+      <label class="switch">
+        <input type="checkbox" id="third-relay">
+        <span class="slider round"></span>
+      </label>
+    </div>
+    <div class="sub-container">
+      <h4>Light</h4>
+      <label class="switch">
+        <input type="checkbox" id="fourth-relay">
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </div>
+  <div class="container between">
+    <h1>Logs</h1>
+    <div id="messages" class="message-container"></div>
+    <input type="text" placeholder="Message" class="message-input" id="message-input-field" enterkeyhint="Enter">
+  </div>
+</body>
+
+<script type="module" src="./scripts/relayToggle.js"></script>
+<script type="module" src="./scripts/sign-out.js"></script>
+<script type="module" src="./scripts/message.js"></script>
+</html>
