@@ -22,7 +22,6 @@ export async function listenToChangesOn(dataPath, element) {
   const dataRef = ref(db, dataPath);
   await onValue(dataRef, (snapShot) => {
     element.checked = snapShot.val();
-    console.log(element.checked);
   });
 }
 
@@ -46,4 +45,16 @@ export async function pushInArray(dataPath, data) {
   const messages = await snapShot.val() || [];
   messages.push(data);
   set(dataRef, messages);
+}
+
+export async function pushInArrayWithCheck(dataPath, data) {
+  const dataRef = ref(db, dataPath);
+  const snapShot = await get(dataRef);
+  const messages = await snapShot.val() || [];
+  if (messages.includes(data)) {
+    return;
+  } else {
+    messages.push(data);
+    set(dataRef, messages);
+  }
 }
