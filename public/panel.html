@@ -4,40 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./styles/styles.css">
+  <script src="https://kit.fontawesome.com/65c673ed11.js" crossorigin="anonymous"></script>
   <title>ESP32</title>  
 </head>
 <body>
-  <button class="logout" id="log-out">Log out</button>
-  <div class="container">
+  <div class="top">
+    <button class="floating" id="add-switch">Add</button>
+    <button class="floating" id="log-out">Log out</button>
+  </div>
+  <div class="container" id="toggle-container">
     <h1>ESP32</h1>
-    <div class="sub-container">
-      <h4>Light</h4>
-      <label class="switch">
-        <input type="checkbox" id="first-relay">
-        <span class="slider round"></span>
-      </label>
-    </div>
-    <div class="sub-container">
-      <h4>Computer</h4>
-      <label class="switch">
-        <input type="checkbox" id="second-relay">
-        <span class="slider round"></span>
-      </label>
-    </div>
-    <div class="sub-container">
-      <h4>Fan</h4>
-      <label class="switch">
-        <input type="checkbox" id="third-relay">
-        <span class="slider round"></span>
-      </label>
-    </div>
-    <div class="sub-container">
-      <h4>Light</h4>
-      <label class="switch">
-        <input type="checkbox" id="fourth-relay">
-        <span class="slider round"></span>
-      </label>
-    </div>
   </div>
   <div class="container between">
     <h1>Logs</h1>
@@ -46,7 +22,18 @@
   </div>
 </body>
 
-<script type="module" src="./scripts/relayToggle.js"></script>
+<div class="add-switch-modal" id="add-switch-modal">
+  <div class="header">
+    <h4>Add a switch</h4>
+    <button id="close-add-switch"><i class="fa-solid fa-xmark fa-lg"></i></button>
+  </div>
+  <input type="text" class="message-input" id="switch-name" placeholder="Switch name">
+</div>
+
+<div class="overlay" id="overlay"></div>
+
+<script type="module" src="./scripts/relay-toggle.js"></script>
 <script type="module" src="./scripts/sign-out.js"></script>
 <script type="module" src="./scripts/message.js"></script>
+<script type="module" src="./scripts/add-switch.js"></script>
 </html>

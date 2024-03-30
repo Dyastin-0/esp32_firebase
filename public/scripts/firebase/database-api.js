@@ -1,6 +1,5 @@
 import { db } from './firebase.js';
-import { ref, set, onValue, push } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
-import { currentDateTime } from './date.js';
+import { ref, set, onValue, push, get } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
 
 export async function setDataInRealtimeDatabase(dataPath, data) {
   const dataRef = ref(db, dataPath);
@@ -22,7 +21,8 @@ export async function pushDataInRealtimeDatabase(dataPath, data) {
 export async function listenToChangesOn(dataPath, element) {
   const dataRef = ref(db, dataPath);
   await onValue(dataRef, (snapShot) => {
-    element.checked = snapShot.val().isOn;
+    element.checked = snapShot.val();
+    console.log(element.checked);
   });
 }
 
@@ -31,11 +31,19 @@ export async function listenToChangesOnSnap(dataPath, container) {
   await onValue(dataRef, (snapShot) => {
     container.innerHTML = "";
     snapShot.forEach((element) => {
-      const data = element.val().message;
+      const data = element.val();
       const childMessage = document.createElement('label');
       childMessage.classList.add('message');
       childMessage.textContent = data;
       container.insertBefore(childMessage, container.firstChild);
     });
   });
+}
+
+export async function pushInArray(dataPath, data) {
+  const dataRef = ref(db, dataPath);
+  const snapShot = await get(dataRef);
+  const messages = await snapShot.val() || [];
+  messages.push(data);
+  set(dataRef, messages);
 }
