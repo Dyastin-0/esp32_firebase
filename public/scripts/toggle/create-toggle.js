@@ -22,7 +22,11 @@ export async function createToggle(path, name) {
 	toggle.addEventListener('click', async (e) => {
 		await setDataInRealtimeDatabase(path, toggle.checked);
 		const state = toggle.checked ? "on" : "off";
-		await pushInArray("/messages", `${name} turned ${state} at ${currentDateTime()}`);
+		await pushInArray("/messages", {
+			sentBy: localStorage.getItem('currentUser'),
+			message: `Turned ${state} the ${name}.`,
+			timeSent: currentDateTime()
+		});
 	});
 
 	listenToChangesOn(path, toggle);

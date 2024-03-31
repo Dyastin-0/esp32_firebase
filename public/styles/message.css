@@ -28,3 +28,11 @@
 .message.right {
   text-align: right;
 }
+
+.sent-by {
+  font-size: 11px;
+  color: var(--text-color);
+}
+.sent-by.right {
+  text-align: right;
+}

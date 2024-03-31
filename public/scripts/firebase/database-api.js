@@ -1,5 +1,6 @@
+import { createMessage } from '../message/create-message.js';
 import { db } from './firebase.js';
-import { ref, set, onValue, push, get } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
+import { ref, set, onValue, push, get, query, limitToLast } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
 
 export async function setDataInRealtimeDatabase(dataPath, data) {
   const dataRef = ref(db, dataPath);
@@ -27,27 +28,9 @@ export async function listenToChangesOn(dataPath, element) {
 
 export async function listenToChangesOnSnap(dataPath, container) {
   const dataRef = ref(db, dataPath);
-  await onValue(dataRef, (snapShot) => {
-    container.innerHTML = "";
-    snapShot.forEach((element) => {
-      const data = element.val().message || element.val();
-      const sentBy = element.val().sentBy;
-      const currentUser = localStorage.getItem('currentUser');
-      const childMessage = document.createElement('label');
-      if (sentBy && (sentBy == currentUser)) {
-        childMessage.classList.add('message');
-        childMessage.classList.add('right');
-        childMessage.textContent = `${data}`;
-      } else if(sentBy) {
-        childMessage.classList.add('message');
-        childMessage.textContent = `${sentBy}: ${data}`;
-      } else {
-        childMessage.classList.add('message');
-        childMessage.textContent = data;
-      }
-      container.append(childMessage);
-      container.scrollTop = container.scrollHeight;
-    });
+  const limitRef = query(dataRef, limitToLast(10));
+  onValue(limitRef, async (snapShot) => {
+    createMessage(snapShot.val(), container);
   });
 }
 
