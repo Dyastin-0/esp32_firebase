@@ -1,0 +1,30 @@
+.message-container {
+  width: calc(100% - 36px);
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-left: 18px;
+  margin-right: 18px;
+  row-gap: 9px;
+  column-gap: 9px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  flex-direction: column;
+}
+
+.message-container::-webkit-scrollbar {
+  display: none;
+}
+
+.message {
+  width: calc(100% - 18px);
+  word-wrap: break-word;
+  color: var(--text-color);
+  background-color: var(--secondary-color);
+  padding: 9px;
+  border-radius: 9px;
+}
+
+.message.right {
+  text-align: right;
+}

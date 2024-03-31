@@ -30,11 +30,23 @@ export async function listenToChangesOnSnap(dataPath, container) {
   await onValue(dataRef, (snapShot) => {
     container.innerHTML = "";
     snapShot.forEach((element) => {
-      const data = element.val();
+      const data = element.val().message || element.val();
+      const sentBy = element.val().sentBy;
+      const currentUser = localStorage.getItem('currentUser');
       const childMessage = document.createElement('label');
-      childMessage.classList.add('message');
-      childMessage.textContent = data;
-      container.insertBefore(childMessage, container.firstChild);
+      if (sentBy && (sentBy == currentUser)) {
+        childMessage.classList.add('message');
+        childMessage.classList.add('right');
+        childMessage.textContent = `${data}`;
+      } else if(sentBy) {
+        childMessage.classList.add('message');
+        childMessage.textContent = `${sentBy}: ${data}`;
+      } else {
+        childMessage.classList.add('message');
+        childMessage.textContent = data;
+      }
+      container.append(childMessage);
+      container.scrollTop = container.scrollHeight;
     });
   });
 }
@@ -47,14 +59,9 @@ export async function pushInArray(dataPath, data) {
   set(dataRef, messages);
 }
 
-export async function pushInArrayWithCheck(dataPath, data) {
+export async function arrayIncludes(dataPath, data) {
   const dataRef = ref(db, dataPath);
   const snapShot = await get(dataRef);
-  const messages = await snapShot.val() || [];
-  if (messages.includes(data)) {
-    return;
-  } else {
-    messages.push(data);
-    set(dataRef, messages);
-  }
+  const loads = await snapShot.val();
+  return loads.includes(data);
 }

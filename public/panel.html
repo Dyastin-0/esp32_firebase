@@ -4,16 +4,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./styles/styles.css">
+  <link rel="stylesheet" href="./styles/drop-down.css">
+  <link rel="stylesheet" href="./styles/toggle.css">
+  <link rel="stylesheet" href="./styles/message.css">
   <link rel="stylesheet" href="./styles/confirm-dialog.css">
   <link rel="stylesheet" href="./styles/process-dialog.css">
   <link rel="stylesheet" href="./styles/toast-message.css">
-  <script src="https://kit.fontawesome.com/65c673ed11.js" crossorigin="anonymous"></script>
-  <title>ESP32</title>  
+  <title>Home Auth - Panel</title>  
 </head>
 <body>
   <div class="top">
-    <button class="floating" id="add-switch">Add</button>
-    <button class="floating" id="log-out">Log out</button>
+    <h4>Home Aut</h4>
+    <div class="wrap">
+      <label class="toggle">
+        <input type="checkbox" id="theme-toggle">
+        <span class="slider round"></span>
+      </label>
+      <div class="drop-down" id="actions-drop-down">
+        <button class="floating bold" id="actions-drop-down-button">
+          <p id="user-name"></p>
+          <i class="fa fa-chevron-down chevron" id="actions-chevron"></i>
+        </button>
+        <div class="drop-down-menu" id="actions-drop-down-menu">
+          <button class="floating" id="add-toggle"> <p>Add</p><i class="fa-solid fa-square-plus"></i></button>
+          <button class="floating" id="delete-toggle"><p>Delete</p><i class="fa-solid fa-square-minus"></i></button>
+          <button class="floating" id="edit-toggle"><p>Edit</p><i class="fa-solid fa-pen-to-square"></i></button>
+          <button class="floating" id="settings"><p>Settings</p><i class="fa-solid fa-gear"></i></button>
+          <button class="floating" id="sign-out"><p>Log out</p><i class="fa-solid fa-right-from-bracket"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
   </div>
   <div class="container">
     <h1>ESP32</h1>
@@ -23,14 +44,14 @@
   <div class="container pad-bottom">
     <h1>Logs</h1>
     <div id="messages" class="message-container"></div>
-    <input type="text" placeholder="Message" class="message-input" id="message-input-field" enterkeyhint="Enter">
+    <input type="text" placeholder="Message" class="input-message" id="message-input-field" enterkeyhint="Enter">
   </div>
 </body>
 
-<div class="add-switch-modal" id="add-switch-modal">
+<div class="add-toggle-modal" id="add-toggle-modal">
   <div class="header">
     <h4>Add a switch</h4>
-    <button class="button fa fa-close fa-lg" id="close-add-switch"></button>
+    <button class="button fa fa-close fa-lg" id="close-add-toggle"></button>
   </div>
   <input type="text" class="message-input" id="switch-name" placeholder="Switch name" enterKeyhint="Enter">
 </div>
@@ -38,7 +59,7 @@
 <div class="overlay" id="overlay"></div>
 
 <div class="confirm-dialog" id="confirm-dialog-modal">
-  <div class="header">
+  <div class="dialog-header">
       <label id="comfirm-dialog-header"> Confirm </label>
       <button class="fa fa-close fa-lg" id="confirm-dialog-close-button" aria-label="confirm-dialog-close-button">  </button>
   </div>
@@ -57,12 +78,15 @@
 </div>
 
 <div class="process-dialog" id="process-dialog-modal">
-<label class="process-message" id="process-message"></label>
-<label class="process-spinner fa-solid fa-circle-notch fa-spin"></label>
+  <label class="process-message" id="process-message"></label>
+  <label class="process-spinner fa-solid fa-circle-notch fa-spin"></label>
 </div>
 
-<script type="module" src="./scripts/relay-toggle.js"></script>
+<script src="https://kit.fontawesome.com/65c673ed11.js" crossorigin="anonymous"></script>
+<script type="module" src="./scripts/toggle/relay-toggle.js"></script>
 <script type="module" src="./scripts/sign-out.js"></script>
-<script type="module" src="./scripts/message.js"></script>
-<script type="module" src="./scripts/add-switch.js"></script>
+<script type="module" src="./scripts/message/message.js"></script>
+<script type="module" src="./scripts/toggle/add-toggle.js"></script>
+<script src="./scripts/ui/theme.js"></script>
+<script src="./scripts/ui/actions-dropdown.js"></script>
 </html>

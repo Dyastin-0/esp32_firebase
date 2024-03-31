@@ -1,7 +1,7 @@
 import { setDataInRealtimeDatabase, 
 	listenToChangesOn,
-	pushInArray } from "./firebase/database-api.js";
-import { currentDateTime } from "./date.js";
+	pushInArray } from "../firebase/database-api.js";
+import { currentDateTime } from "../utils/date.js";
 
 export async function createToggle(path, name) {
   const subContainer = document.createElement('div');
@@ -11,7 +11,7 @@ export async function createToggle(path, name) {
 	const span = document.createElement('span');
 
 	subContainer.classList.add('sub-container');
-	label.classList.add('switch');
+	label.classList.add('toggle');
 	span.classList.add('slider');
 	span.classList.add('round');
 	toggle.type = 'checkbox';

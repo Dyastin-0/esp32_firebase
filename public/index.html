@@ -3,19 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login</title>
+<title>Home Auth - Login</title>
+<link rel="stylesheet" href="./styles/styles.css">
 <link rel="stylesheet" href="./styles/login.css">
+<link rel="stylesheet" href="./styles/process-dialog.css">
+<link rel="stylesheet" href="./styles/toast-message.css">
+<link rel="stylesheet" href="./styles/toggle.css">
 </head>
 <body>
-
-<div class="login-container">
-    <h2>Login</h2>
+  <div class="top">
+    <h4>Home Aut</h4>
+    <label class="toggle">
+      <input type="checkbox" id="theme-toggle">
+      <span class="slider round"></span>
+    </label>
+  </div>
+  <div class="login-container" id="login-container">
+    <h2>Home Aut</h2>
+    <h4 class="h4">Log in to access the panel</h4>
     <form>
-        <input type="text" placeholder="Email" id="email" enterkeyhint="Enter">
-        <input type="password" placeholder="Password" id="password" autocomplete="on" enterkeyhint="Enter">
-        <button id= "login-button"> Login </button>
-    </form>
-</div>
+      <input type="text" placeholder="Email" id="email" enterkeyhint="Enter">
+      <input type="password" placeholder="Password" id="password" autocomplete="on" enterkeyhint="Enter">
+      <button id= "login-button"> Login </button>
+      </form>
+  </div>
 </body>
+
+<div class="toast-message" id="toast-message-modal">
+  <p class="message-t" id="toast-message"></p>
+  <button class="button fa fa-close" id="toast-button" aria-label="toast-close-button">  </button>
+</div>
+  
+<div class="process-dialog" id="process-dialog-modal">
+  <label class="process-message" id="process-message"></label>
+  <label class="process-spinner fa-solid fa-circle-notch fa-spin"></label>
+</div>
+
+<script src="https://kit.fontawesome.com/65c673ed11.js" crossorigin="anonymous"></script>
 <script type="module" src="./scripts/firebase/auth-api.js"></script>
+<script src="./scripts/ui/theme.js"></script>
+
 </html>
