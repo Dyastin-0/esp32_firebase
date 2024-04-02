@@ -18,11 +18,11 @@ onAuthStateChanged(auth, (user) => {
 
 
 function listenToChanges() {
-  const dataRef = ref(db, "/loads");
+  const dataRef = ref(db, "/toggles/names");
   onValue(dataRef, (snapShot) => {
     container.innerHTML = "";
     snapShot.val().forEach(async (data, index) => {
-      const toggle = await createToggle(`/${index}`, data);
+      const toggle = await createToggle(`/toggles/states/${index}`, data);
       container.append(toggle);
     });
   });

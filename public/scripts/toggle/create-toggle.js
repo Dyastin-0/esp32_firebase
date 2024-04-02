@@ -1,4 +1,4 @@
-import { setDataInRealtimeDatabase, 
+import { setData, 
 	listenToChangesOn,
 	pushInArray } from "../firebase/database-api.js";
 import { currentDateTime } from "../utils/date.js";
@@ -20,11 +20,11 @@ export async function createToggle(path, name) {
 	loadName.textContent = name;
 
 	toggle.addEventListener('click', async (e) => {
-		await setDataInRealtimeDatabase(path, toggle.checked);
+		await setData(path, toggle.checked);
 		const state = toggle.checked ? "on" : "off";
 		await pushInArray("/messages", {
 			sentBy: localStorage.getItem('currentUser'),
-			message: `Turned ${state} the ${name}.`,
+			message: `Turned ${state} the ${name.toLowerCase()}.`,
 			timeSent: currentDateTime()
 		});
 	});
